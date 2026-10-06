@@ -1,0 +1,560 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07080d;
+    --panel: rgba(255,255,255,0.055);
+    --line: rgba(255,255,255,0.12);
+    --text: #f5f7fb;
+    --muted: #a8afbd;
+    --accent: #b8ff38;
+    --accent-2: #8b5cf6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% 10%, rgba(139,92,246,.18), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(184,255,56,.10), transparent 24%),
+        linear-gradient(135deg, #05060a, #0a0d14 55%, #06070b);
+    font-family: Inter, sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .22;
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.page-shell {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 80px 0 70px;
+}
+
+/* ---------------- TODO ---------------- */
+
+.todo-section {
+    text-align: center;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eyebrow,
+.section-kicker {
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.todo-section h1 {
+    margin-top: 14px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: .95;
+    letter-spacing: -3px;
+    text-shadow: 0 12px 35px rgba(0,0,0,.5);
+}
+
+.subtitle {
+    margin: 18px 0 34px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.todo-input-wrap {
+    display: flex;
+    width: min(600px, 100%);
+    padding: 7px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255,255,255,.055);
+    backdrop-filter: blur(18px);
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    transform: perspective(900px) rotateX(2deg);
+}
+
+#todo-input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 17px;
+    border: 0;
+    outline: 0;
+    border-radius: 13px;
+    background: transparent;
+    color: #fff;
+    font-size: 15px;
+}
+
+#todo-input::placeholder {
+    color: #7f8796;
+}
+
+#add-btn {
+    border: 0;
+    border-radius: 13px;
+    padding: 0 24px;
+    background: var(--accent);
+    color: #070807;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .25s ease;
+    box-shadow: 0 10px 28px rgba(184,255,56,.18);
+}
+
+#add-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 16px 35px rgba(184,255,56,.28);
+}
+
+#todo-list {
+    list-style: none;
+    width: min(600px, 100%);
+    margin-top: 24px;
+    padding: 0;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 16px;
+    margin-bottom: 10px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    color: #fff;
+    background: rgba(255,255,255,.055);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 35px rgba(0,0,0,.18);
+    animation: todoIn .35s ease forwards;
+}
+
+#todo-list input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+#todo-list span {
+    flex: 1;
+    text-align: left;
+    cursor: pointer;
+    color: #e9edf4;
+    overflow-wrap: anywhere;
+}
+
+#todo-list button {
+    flex: 0 0 auto;
+    border: 1px solid rgba(255,75,92,.35);
+    border-radius: 9px;
+    padding: 7px 11px;
+    background: rgba(255,75,92,.12);
+    color: #ff7d89;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+#todo-list button:hover {
+    background: #ff4b5c;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+@keyframes todoIn {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------------- 3D PROFILE SECTION ---------------- */
+
+.network-section {
+    position: relative;
+    margin-top: 40px;
+    padding: 90px 0 100px;
+}
+
+.section-heading {
+    max-width: 720px;
+    margin-bottom: 45px;
+}
+
+.section-heading h2,
+.contact-section h2 {
+    margin: 12px 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(34px, 5vw, 58px);
+    letter-spacing: -2px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 15px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    perspective: 1600px;
+}
+
+.profile-card {
+    min-height: 610px;
+    perspective: 1200px;
+}
+
+.card-inner {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 28px;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.025));
+    backdrop-filter: blur(18px);
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.09);
+    transform-style: preserve-3d;
+    transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .3s ease;
+}
+
+.profile-card:hover .card-inner {
+    transform: rotateX(4deg) rotateY(-6deg) translateY(-10px);
+    border-color: rgba(184,255,56,.4);
+}
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    color: #c8ced9;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .25s ease;
+}
+
+.instagram-link span {
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.instagram-link:hover {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.instagram-link:hover span {
+    text-shadow: 0 0 12px rgba(184,255,56,.6);
+}
+
+.card-inner::before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    right: -75px;
+    top: 180px;
+    border-radius: 50%;
+    background: rgba(184,255,56,.12);
+    filter: blur(30px);
+    pointer-events: none;
+}
+
+.image-frame {
+    position: relative;
+    height: 340px;
+    overflow: hidden;
+    margin: 12px;
+    border-radius: 21px;
+    transform: translateZ(35px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.4);
+}
+
+.image-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.62), transparent 50%);
+    pointer-events: none;
+}
+
+.image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s ease;
+}
+
+.profile-card:hover .image-frame img {
+    transform: scale(1.07);
+}
+
+.number {
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    background: rgba(0,0,0,.42);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font: 700 12px "Space Grotesk", sans-serif;
+}
+
+.profile-content {
+    padding: 17px 23px 27px;
+    transform: translateZ(28px);
+}
+
+.handle {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.profile-content h3 {
+    margin-top: 7px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 26px;
+}
+
+.role {
+    margin-top: 5px;
+    color: #c4cad5;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.profile-content p {
+    margin-top: 17px;
+    color: #aeb5c1;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 18px;
+}
+
+.tag-row span {
+    padding: 7px 9px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 100px;
+    background: rgba(255,255,255,.04);
+    color: #c8ced9;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.alpha-statement {
+    position: relative;
+    max-width: 900px;
+    margin: 75px auto 0;
+    padding: 30px 0 0;
+    text-align: center;
+}
+
+.statement-line {
+    width: 90px;
+    height: 2px;
+    margin: 0 auto 24px;
+    background: var(--accent);
+    box-shadow: 0 0 20px rgba(184,255,56,.4);
+}
+
+.alpha-statement p {
+    color: #c4cad5;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.alpha-statement strong {
+    color: #fff;
+}
+
+.alpha-note {
+    margin-top: 13px;
+    color: #7f8795 !important;
+    font-size: 12px !important;
+}
+
+/* ---------------- CONTACT ---------------- */
+
+.contact-section {
+    padding: 65px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.contact-intro {
+    margin-bottom: 28px;
+}
+
+.contact-section h2 {
+    font-size: 35px;
+    margin-bottom: 0;
+}
+
+.links {
+    display: grid;
+    gap: 11px;
+}
+
+.links a {
+    display: grid;
+    grid-template-columns: 110px 1fr 20px;
+    gap: 15px;
+    align-items: center;
+    padding: 19px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: rgba(255,255,255,.045);
+    color: #fff;
+    text-decoration: none;
+    transition: .25s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.links a:hover {
+    transform: translateX(6px);
+    border-color: rgba(184,255,56,.4);
+    background: rgba(184,255,56,.055);
+}
+
+.links small {
+    color: #777f8d;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.links b {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.links span {
+    text-align: right;
+    color: var(--accent);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 900px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .profile-card {
+        min-height: auto;
+    }
+
+    .image-frame {
+        height: 390px;
+    }
+}
+
+@media (max-width: 560px) {
+    .page-shell {
+        width: 92%;
+        padding-top: 55px;
+    }
+
+    .todo-section {
+        min-height: 420px;
+    }
+
+    .todo-section h1 {
+        letter-spacing: -2px;
+    }
+
+    .todo-input-wrap {
+        flex-direction: column;
+        gap: 7px;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    #todo-input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: rgba(255,255,255,.055);
+        padding: 15px;
+    }
+
+    #add-btn {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    #todo-list li {
+        padding: 13px;
+    }
+
+    .network-section {
+        padding-top: 60px;
+    }
+
+    .image-frame {
+        height: 330px;
+    }
+
+    .links a {
+        grid-template-columns: 1fr 20px;
+    }
+
+    .links small {
+        display: none;
+    }
+
+    .links b {
+        overflow-wrap: anywhere;
+    }
+}
